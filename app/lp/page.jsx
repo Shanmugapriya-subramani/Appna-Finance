@@ -364,7 +364,7 @@ export default function LandingPage() {
           </div>
           <a
             href="/hub"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#F6E7B2] to-[#C9A227] px-5 py-2.5 text-sm font-semibold text-[#0A0C10] transition hover:brightness-110"
+            className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-[#F6E7B2] to-[#C9A227] px-5 py-2.5 text-sm font-semibold text-[#0A0C10] transition hover:brightness-110 md:inline-flex"
           >
             Start Learning
             <ArrowRight size={15} />
