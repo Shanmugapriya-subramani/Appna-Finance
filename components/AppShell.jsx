@@ -30,6 +30,11 @@ export default function AppShell({ children }) {
     return () => clearTimeout(t);
   }, [loading]);
 
+  // Standalone landing page renders without the app shell
+  if (pathname === "/lp" || pathname?.startsWith("/lp/")) {
+    return <>{children}</>;
+  }
+
   return (
     <>
       <TopNav />
