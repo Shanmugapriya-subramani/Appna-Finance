@@ -59,7 +59,11 @@ export default function AssistantPage() {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [listening, setListening] = useState(false);
+  const [speechSupported, setSpeechSupported] = useState(true);
+  const [micError, setMicError] = useState("");
   const scrollRef = useRef(null);
+  const recognitionRef = useRef(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({
@@ -67,6 +71,61 @@ export default function AssistantPage() {
       behavior: "smooth",
     });
   }, [messages, loading]);
+
+  useEffect(() => {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      setSpeechSupported(false);
+      return;
+    }
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-IN";
+    recognition.interimResults = true;
+    recognition.continuous = false;
+    recognition.onresult = (e) => {
+      const transcript = Array.from(e.results)
+        .map((r) => r[0].transcript)
+        .join("");
+      setInput(transcript);
+    };
+    recognition.onend = () => setListening(false);
+    recognition.onerror = (e) => {
+      setListening(false);
+      if (e.error === "not-allowed" || e.error === "service-not-allowed") {
+        setMicError(
+          "Microphone access is blocked. Click the lock/mic icon in your browser's address bar, allow the microphone, then try again.",
+        );
+      } else if (e.error === "no-speech") {
+        setMicError("No speech detected. Tap the mic and speak clearly.");
+      } else if (e.error === "audio-capture") {
+        setMicError(
+          "No microphone was found. Check that a mic is connected and enabled.",
+        );
+      } else if (e.error !== "aborted") {
+        setMicError(`Voice input error: ${e.error}. Please try again.`);
+      }
+    };
+    recognitionRef.current = recognition;
+    return () => recognition.abort();
+  }, []);
+
+  function toggleMic() {
+    const recognition = recognitionRef.current;
+    if (!recognition) return;
+    if (listening) {
+      recognition.stop();
+    } else {
+      try {
+        setMicError("");
+        setInput("");
+        recognition.start();
+        setListening(true);
+      } catch {
+        // start() throws if recognition is already running
+      }
+    }
+  }
 
   async function send(text) {
     const q = (text ?? input).trim();
@@ -131,9 +190,9 @@ export default function AssistantPage() {
           <h1 className="text-[2.2rem] md:text-[2.8rem] font-semibold leading-tight text-[#F2F1EC]">
             APPNA AI Assistant
           </h1>
-          <p className="mt-2 max-w-3xl text-[15px] md:text-[16px] text-[#A9AEB6] leading-relaxed">
+          <p className="mt-2 text-[15px] md:text-[16px] text-[#A9AEB6] leading-relaxed">
             Ask questions about banking, investments, loans, insurance, taxes,
-            and government schemes in simple, jargon-free language.
+            and government schemes in simple language.
           </p>
         </div>
       </AnimatedSection>
@@ -264,17 +323,61 @@ export default function AssistantPage() {
           )}
         </div>
 
+        {/* Recording Indicator */}
+        {listening && (
+          <div
+            className="flex items-center gap-3 rounded-xl px-4 py-3 text-[13.5px]"
+            style={{
+              background: "rgba(239,68,68,0.08)",
+              border: "1px solid rgba(239,68,68,0.4)",
+              color: "#F2F1EC",
+            }}
+          >
+            <span className="relative flex h-3 w-3 shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
+              <span className="relative inline-flex h-3 w-3 rounded-full bg-red-500" />
+            </span>
+            <span>
+              <strong className="text-red-400">Recording</strong> — speak now…
+              {input && (
+                <span className="text-[#A9AEB6]"> &ldquo;{input}&rdquo;</span>
+              )}
+            </span>
+          </div>
+        )}
+
+        {/* Mic Error */}
+        {micError && (
+          <div
+            className="flex items-center gap-2 rounded-xl px-4 py-3 text-[13px]"
+            style={{
+              background: "rgba(239,68,68,0.08)",
+              border: "1px solid rgba(239,68,68,0.35)",
+              color: "#FCA5A5",
+            }}
+          >
+            <AlertTriangle size={16} className="shrink-0" />
+            <span>{micError}</span>
+          </div>
+        )}
+
         {/* Input Box */}
         <div className="flex flex-col sm:flex-row gap-3">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && send()}
-            placeholder="Ask your financial question… (e.g., Explain compound interest)"
+            placeholder={
+              listening
+                ? "Listening… speak your question now"
+                : "Ask your financial question… (e.g., Explain compound interest)"
+            }
             className="flex-1 rounded-xl px-4 py-3.5 text-[14px] transition-all"
             style={{
               background: "#12151B",
-              border: "1px solid rgba(212,175,55,0.25)",
+              border: listening
+                ? "1px solid rgba(239,68,68,0.6)"
+                : "1px solid rgba(212,175,55,0.25)",
               color: "#F2F1EC",
             }}
           />
@@ -288,17 +391,38 @@ export default function AssistantPage() {
               Ask AI
             </GoldButton>
             <button
-              disabled
-              title="Voice Assistant coming soon"
-              className="rounded-xl px-4 py-3 opacity-50 flex items-center gap-2 cursor-not-allowed text-[13px]"
+              onClick={toggleMic}
+              disabled={!speechSupported}
+              title={
+                !speechSupported
+                  ? "Voice input is not supported in this browser"
+                  : listening
+                    ? "Stop listening"
+                    : "Speak your question"
+              }
+              className={`rounded-xl px-4 py-3 flex items-center gap-2 text-[13px] transition-all ${
+                speechSupported
+                  ? "hover:border-[#D4AF37]/50"
+                  : "opacity-50 cursor-not-allowed"
+              }`}
               style={{
-                background: "rgba(23,27,34,0.8)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: "#A9AEB6",
+                background: listening
+                  ? "rgba(239,68,68,0.15)"
+                  : "rgba(23,27,34,0.8)",
+                border: listening
+                  ? "1px solid rgba(239,68,68,0.6)"
+                  : "1px solid rgba(255,255,255,0.1)",
+                color: listening ? "#FCA5A5" : "#A9AEB6",
               }}
             >
-              <Mic size={18} color="#D4AF37" />
-              <span className="hidden sm:inline">Coming Soon</span>
+              <Mic
+                size={18}
+                color={listening ? "#EF4444" : "#D4AF37"}
+                className={listening ? "animate-pulse" : ""}
+              />
+              <span className="hidden sm:inline">
+                {listening ? "Stop" : "Speak"}
+              </span>
             </button>
           </div>
         </div>
