@@ -35,40 +35,146 @@ import Image from "next/image";
 
 // Content updated to reflect the Streamlit About page copy provided
 const missions = [
-  { icon: BookOpen, title: "Financial Education", desc: "Easy learning resources covering everyday money management, saving hacks, and investment options." },
-  { icon: Bot, title: "AI Powered Learning", desc: "An active AI assistant available 24/7 to solve your questions in simple words without technical jargon." },
-  { icon: Landmark, title: "Banking Knowledge", desc: "A clear guide to savings accounts, FD rates, online transactions, and staying safe from financial fraud." },
-  { icon: TrendingUp, title: "Stock Market Basics", desc: "Demystifying mutual funds, stocks, indices (NSE/BSE), and smart portfolio investing." },
-  { icon: ShieldCheck, title: "Loans, Insurance & Tax", desc: "Understand different loans, find the right insurance cover, and navigate income tax slabs easily." },
-  { icon: Sprout, title: "Government Schemes", desc: "Easy instructions explaining rural subsidies, MSME grants, and social welfare programs." },
+  {
+    icon: BookOpen,
+    title: "Financial Education",
+    desc: "Easy learning resources covering everyday money management, saving hacks, and investment options.",
+  },
+  {
+    icon: Bot,
+    title: "AI Powered Learning",
+    desc: "An active AI assistant available 24/7 to solve your questions in simple words without technical jargon.",
+  },
+  {
+    icon: Landmark,
+    title: "Banking Knowledge",
+    desc: "A clear guide to savings accounts, FD rates, online transactions, and staying safe from financial fraud.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Stock Market Basics",
+    desc: "Demystifying mutual funds, stocks, indices (NSE/BSE), and smart portfolio investing.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Loans, Insurance & Tax",
+    desc: "Understand different loans, find the right insurance cover, and navigate income tax slabs easily.",
+  },
+  {
+    icon: Sprout,
+    title: "Government Schemes",
+    desc: "Easy instructions explaining rural subsidies, MSME grants, and social welfare programs.",
+  },
 ];
 
 const audience = [
-  { icon: BookOpen, title: "Students", desc: "Learn how to build early savings, understand money basics, and prepare for student loan decisions early." },
-  { icon: Sprout, title: "Farmers", desc: "Know your options under the Kisan Credit Card (KCC), crop insurance coverage, and farm business grants." },
-  { icon: Briefcase, title: "Professionals", desc: "Master active tax savings strategies, asset allocation, smart budget rules, and long-term investment setups." },
-  { icon: Briefcase, title: "MSMEs", desc: "Scale your small business with secure startup capital guidance, business loans, and MSME tax benefits." },
-  { icon: Users, title: "Families", desc: "Set up robust emergency funds, plan family insurance plans, and organize life goals seamlessly." },
-  { icon: TrendingUp, title: "First-Time Investors", desc: "Step confidently into SIPs, mutual funds, and stock markets without fear of complicated jargon." },
+  {
+    icon: BookOpen,
+    title: "Students",
+    desc: "Learn how to build early savings, understand money basics, and prepare for student loan decisions early.",
+  },
+  {
+    icon: Sprout,
+    title: "Farmers",
+    desc: "Know your options under the Kisan Credit Card (KCC), crop insurance coverage, and farm business grants.",
+  },
+  {
+    icon: Briefcase,
+    title: "Professionals",
+    desc: "Master active tax savings strategies, asset allocation, smart budget rules, and long-term investment setups.",
+  },
+  {
+    icon: Briefcase,
+    title: "MSMEs",
+    desc: "Scale your small business with secure startup capital guidance, business loans, and MSME tax benefits.",
+  },
+  {
+    icon: Users,
+    title: "Families",
+    desc: "Set up robust emergency funds, plan family insurance plans, and organize life goals seamlessly.",
+  },
+  {
+    icon: TrendingUp,
+    title: "First-Time Investors",
+    desc: "Step confidently into SIPs, mutual funds, and stock markets without fear of complicated jargon.",
+  },
 ];
 
 const values = [
-  { icon: BookOpen, title: "Education First", desc: "Our central goal is to teach you how money works, not sell you financial products." },
-  { icon: Bot, title: "AI for Good", desc: "Applying state-of-the-art conversational AI to solve personal financial confusion on demand." },
-  { icon: ShieldCheck, title: "Trust & Transparency", desc: "Unbiased information without high-interest loans, promotions, or hidden sales scripts." },
-  { icon: Globe2, title: "Financial Inclusion", desc: "Reaching remote towns, agricultural zones, and everyday households with regional language dialects." },
-  { icon: Cpu, title: "Purposeful Tech", desc: "Designing clear, low-friction interfaces so even a beginner can learn easily." },
-  { icon: Heart, title: "Customer First", desc: "Structuring our learning flows, roadmaps, and videos around your questions and needs." },
-  { icon: Users, title: "Empowering India", desc: "Doing our part to build a financially literate, self-reliant, and money-smart nation." },
+  {
+    icon: BookOpen,
+    title: "Education First",
+    desc: "Our central goal is to teach you how money works, not sell you financial products.",
+  },
+  {
+    icon: Bot,
+    title: "AI for Good",
+    desc: "Applying state-of-the-art conversational AI to solve personal financial confusion on demand.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Trust & Transparency",
+    desc: "Unbiased information without high-interest loans, promotions, or hidden sales scripts.",
+  },
+  {
+    icon: Globe2,
+    title: "Financial Inclusion",
+    desc: "Reaching remote towns, agricultural zones, and everyday households with regional language dialects.",
+  },
+  {
+    icon: Cpu,
+    title: "Purposeful Tech",
+    desc: "Designing clear, low-friction interfaces so even a beginner can learn easily.",
+  },
+  {
+    icon: Heart,
+    title: "Customer First",
+    desc: "Structuring our learning flows, roadmaps, and videos around your questions and needs.",
+  },
+  {
+    icon: Users,
+    title: "Empowering India",
+    desc: "Doing our part to build a financially literate, self-reliant, and money-smart nation.",
+  },
 ];
 
 const techStack = [
-  { icon: Monitor, title: "Frontend", name: "Streamlit", desc: "Powering a beautiful, responsive, premium glassmorphic visual interface." },
-  { icon: Server, title: "Backend", name: "FastAPI (Upcoming)", desc: "A high-performance backend processing fast user queries and orchestrations." },
-  { icon: Cpu, title: "AI Engine", name: "Vertex AI & Groq LLM", desc: "Generating simple, accurate, multilingual answers in seconds." },
-  { icon: Database, title: "Knowledge Base", name: "ChromaDB (RAG)", desc: "Empowering the AI assistant with verified financial books and guidelines." },
-  { icon: Lock, title: "Security & Auth", name: "Supabase (Upcoming)", desc: "Ensuring highly secure user logins and personalized tracking metrics." },
-  { icon: Cloud, title: "Infrastructure", name: "Google Cloud Platform", desc: "Hosting scalable servers to deliver seamless education nationwide." },
+  {
+    icon: Monitor,
+    title: "Frontend",
+    name: "Streamlit",
+    desc: "Powering a beautiful, responsive, premium glassmorphic visual interface.",
+  },
+  {
+    icon: Server,
+    title: "Backend",
+    name: "FastAPI (Upcoming)",
+    desc: "A high-performance backend processing fast user queries and orchestrations.",
+  },
+  {
+    icon: Cpu,
+    title: "AI Engine",
+    name: "Vertex AI & Groq LLM",
+    desc: "Generating simple, accurate, multilingual answers in seconds.",
+  },
+  {
+    icon: Database,
+    title: "Knowledge Base",
+    name: "ChromaDB (RAG)",
+    desc: "Empowering the AI assistant with verified financial books and guidelines.",
+  },
+  {
+    icon: Lock,
+    title: "Security & Auth",
+    name: "Supabase (Upcoming)",
+    desc: "Ensuring highly secure user logins and personalized tracking metrics.",
+  },
+  {
+    icon: Cloud,
+    title: "Infrastructure",
+    name: "Google Cloud Platform",
+    desc: "Hosting scalable servers to deliver seamless education nationwide.",
+  },
 ];
 
 const roadmapPhases = [
@@ -124,7 +230,11 @@ const contactDetails = [
   { icon: Globe2, label: "Website", value: "Coming Soon" },
   { icon: Github, label: "GitHub", value: "Coming Soon" },
   { icon: Linkedin, label: "LinkedIn", value: "Coming Soon" },
-  { icon: Youtube, label: "YouTube Channel", value: "https://youtube.com/@akashlearninghub-m7n" },
+  {
+    icon: Youtube,
+    label: "YouTube Channel",
+    value: "https://youtube.com/@akashlearninghub-m7n",
+  },
 ];
 
 export default function AboutPage() {
@@ -157,12 +267,12 @@ export default function AboutPage() {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="/assistant">
-            <GoldButton icon={ShieldCheck}>Explore Our Mission</GoldButton>
+            <a href="#mission">
+              <GoldButton icon={ShieldCheck}>Explore Our Mission</GoldButton>
             </a>
-            <a href="/about">
+            <a href="#founding-team">
               <GoldButton variant="outline" icon={Youtube}>
-              Meet Our Team
+                Meet Our Team
               </GoldButton>
             </a>
           </div>
@@ -183,7 +293,7 @@ export default function AboutPage() {
 
       {/* MISSION */}
       <AnimatedSection delay={0.15}>
-        <section>
+        <section id="mission" style={{ scrollMarginTop: "110px" }}>
           <SectionEyebrow icon={BookOpen}>Our Mission</SectionEyebrow>
           <div className="grid sm:grid-cols-3 gap-4 mt-4">
             {missions.map((m, i) => (
@@ -193,7 +303,9 @@ export default function AboutPage() {
               >
                 <div className="flex items-center gap-3">
                   <IconTile icon={m.icon} boxed={false} size={18} />
-                  <div className="text-[14px] font-semibold text-[#D4AF37]">{m.title}</div>
+                  <div className="text-[14px] font-semibold text-[#D4AF37]">
+                    {m.title}
+                  </div>
                 </div>
                 <div className="mt-2 text-[13px] text-[#B0B0B0]">{m.desc}</div>
               </div>
@@ -214,7 +326,9 @@ export default function AboutPage() {
               >
                 <div className="flex items-center gap-3">
                   <IconTile icon={a.icon} boxed={false} size={18} />
-                  <div className="text-[14px] font-semibold text-[#D4AF37]">{a.title}</div>
+                  <div className="text-[14px] font-semibold text-[#D4AF37]">
+                    {a.title}
+                  </div>
                 </div>
                 <div className="mt-2 text-[13px] text-[#B0B0B0]">{a.desc}</div>
               </div>
@@ -251,7 +365,9 @@ export default function AboutPage() {
               >
                 <div className="flex items-center gap-3">
                   <IconTile icon={v.icon} boxed={false} size={16} />
-                  <div className="text-[13px] font-semibold text-[#D4AF37]">{v.title}</div>
+                  <div className="text-[13px] font-semibold text-[#D4AF37]">
+                    {v.title}
+                  </div>
                 </div>
                 <div className="mt-2 text-[13px] text-[#B0B0B0]">{v.desc}</div>
               </div>
@@ -272,9 +388,11 @@ export default function AboutPage() {
               >
                 <div className="flex items-center gap-3">
                   <IconTile icon={t.icon} boxed={false} size={18} />
-                  <div className="text-[13px] font-semibold text-[#D4AF37]">{t.title}</div>
+                  <div className="text-[13px] font-semibold text-[#D4AF37]">
+                    {t.title}
+                  </div>
                 </div>
-                <div className="mt-2 text-[14px] font-semibold text-white">{t.name}</div>
+                {/* <div className="mt-2 text-[14px] font-semibold text-white">{t.name}</div> */}
                 <div className="mt-2 text-[13px] text-[#808080]">{t.desc}</div>
               </div>
             ))}
@@ -285,7 +403,9 @@ export default function AboutPage() {
       {/* ROADMAP */}
       <AnimatedSection delay={0.4}>
         <section>
-          <SectionEyebrow icon={Landmark}>Our Evolutionary Journey</SectionEyebrow>
+          <SectionEyebrow icon={Landmark}>
+            Our Evolutionary Journey
+          </SectionEyebrow>
           <div className="mt-4 space-y-4">
             {roadmapPhases.map((r, i) => (
               <div
@@ -406,7 +526,7 @@ export default function AboutPage() {
 
       {/* THE FOUNDING TEAM */}
       <AnimatedSection delay={0.5}>
-        <section>
+        <section id="founding-team" style={{ scrollMarginTop: "110px" }}>
           <SectionEyebrow icon={Users}>The Founding Team</SectionEyebrow>
           <div className="grid md:grid-cols-3 gap-8 mt-4">
             {teamMembers.map((m, i) => (
@@ -414,7 +534,12 @@ export default function AboutPage() {
                 <div className="flex flex-col items-center">
                   <div className="w-24 h-24 md:w-28 md:h-28 rounded-lg overflow-hidden mb-4 relative">
                     <Image
-                      src={m.img && (m.img.startsWith("/") ? `/team${m.img}` : `/team/${m.img}`)}
+                      src={
+                        m.img &&
+                        (m.img.startsWith("/")
+                          ? `/team${m.img}`
+                          : `/team/${m.img}`)
+                      }
                       alt={m.name}
                       fill
                       className="object-cover"
@@ -445,7 +570,9 @@ export default function AboutPage() {
       {/* WHY APPNA FINANCE */}
       <AnimatedSection delay={0.55}>
         <section>
-          <SectionEyebrow icon={CheckCircle2}>Why Choose APPNA FINANCE?</SectionEyebrow>
+          <SectionEyebrow icon={CheckCircle2}>
+            Why Choose APPNA FINANCE?
+          </SectionEyebrow>
           <div className="grid sm:grid-cols-4 gap-4 mt-4">
             {[
               [
@@ -491,7 +618,9 @@ export default function AboutPage() {
               >
                 <div className="flex items-center justify-center gap-2">
                   <IconTile icon={c.icon} boxed={false} size={16} />
-                  <div className="text-[13px] font-semibold text-[#D4AF37]">{c.label}</div>
+                  <div className="text-[13px] font-semibold text-[#D4AF37]">
+                    {c.label}
+                  </div>
                 </div>
                 {c.value.startsWith && c.value.startsWith("http") ? (
                   <a
