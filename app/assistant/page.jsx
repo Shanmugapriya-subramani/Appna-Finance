@@ -495,17 +495,6 @@ export default function AssistantPage() {
                 Talk directly to your advisor with real-time natural language
                 auditory conversion.
               </p>
-              <div className="mt-4">
-                <span
-                  className="inline-block text-[11px] font-semibold px-3 py-1 rounded-full text-[#D4AF37]"
-                  style={{
-                    background: "rgba(212,175,55,0.1)",
-                    border: "1px solid rgba(212,175,55,0.3)",
-                  }}
-                >
-                  Coming Soon
-                </span>
-              </div>
             </Card>
 
             {/* Document Parsing */}
