@@ -64,6 +64,7 @@ export default function AssistantPage() {
   const [micError, setMicError] = useState("");
   const scrollRef = useRef(null);
   const recognitionRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({
@@ -89,7 +90,10 @@ export default function AssistantPage() {
         .join("");
       setInput(transcript);
     };
-    recognition.onend = () => setListening(false);
+    recognition.onend = () => {
+      setListening(false);
+      inputRef.current?.focus();
+    };
     recognition.onerror = (e) => {
       setListening(false);
       if (e.error === "not-allowed" || e.error === "service-not-allowed") {
@@ -364,6 +368,7 @@ export default function AssistantPage() {
         {/* Input Box */}
         <div className="flex flex-col sm:flex-row gap-3">
           <input
+            ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && send()}
