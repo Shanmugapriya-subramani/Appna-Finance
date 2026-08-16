@@ -177,31 +177,46 @@ const techStack = [
   },
 ];
 
+// Status drives the roadmap colour, badge label and check icon, so completed
+// phases no longer have to be the first ones in the list.
+const phaseStatus = {
+  completed: { label: "Completed", color: "#55D437" },
+  inProgress: { label: "In Progress", color: "#D4AF37" },
+  upcoming: { label: "Upcoming", color: "#808080" },
+  future: { label: "Future", color: "#808080" },
+};
+
 const roadmapPhases = [
-  [
-    "Phase 1: Frontend MVP (Completed)",
-    "Successfully constructed premium luxury user interfaces, demo chat engines, and structured learning categories.",
-  ],
-  [
-    "Phase 2: AI Assistant Core (In Progress)",
-    "Tuning our LLM engines to explain personal finance in highly conversational, simplified regional languages.",
-  ],
-  [
-    "Phase 3: Google Cloud Integration (Upcoming)",
-    "Deploying secure database layers, establishing RAG architecture models, and connecting backend routes via FastAPI.",
-  ],
-  [
-    "Phase 4: Voice & Regional Dialect (Upcoming)",
-    "Enabling natural vocal inputs and audio responses to make the app friendly for elderly and rural users.",
-  ],
-  [
-    "Phase 5: Automated Document Summarizer (Upcoming)",
-    "Enable simple PDF audits to scan complex loan contracts, bank letters, or taxes instantly with AI.",
-  ],
-  [
-    "Phase 6: National Scale Release (Future)",
-    "Official platform rollout helping millions across schools, colleges, cooperatives, and small businesses.",
-  ],
+  {
+    title: "Phase 1: Frontend MVP",
+    status: "completed",
+    desc: "Successfully constructed premium luxury user interfaces, demo chat engines, and structured learning categories.",
+  },
+  {
+    title: "Phase 2: AI Assistant Core",
+    status: "completed",
+    desc: "Tuning our LLM engines to explain personal finance in highly conversational, simplified regional languages.",
+  },
+  {
+    title: "Phase 3: Voice & Regional Dialect",
+    status: "completed",
+    desc: "Enabling natural vocal inputs and audio responses to make the app friendly for elderly and rural users.",
+  },
+  {
+    title: "Phase 4: Google Cloud Integration",
+    status: "upcoming",
+    desc: "Deploying secure database layers, establishing RAG architecture models, and connecting backend routes via FastAPI.",
+  },
+  {
+    title: "Phase 5: Automated Document Summarizer",
+    status: "upcoming",
+    desc: "Enable simple PDF audits to scan complex loan contracts, bank letters, or taxes instantly with AI.",
+  },
+  {
+    title: "Phase 6: National Scale Release",
+    status: "future",
+    desc: "Official platform rollout helping millions across schools, colleges, cooperatives, and small businesses.",
+  },
 ];
 
 const teamMembers = [
@@ -407,27 +422,39 @@ export default function AboutPage() {
             Our Evolutionary Journey
           </SectionEyebrow>
           <div className="mt-4 space-y-4">
-            {roadmapPhases.map((r, i) => (
-              <div
-                key={i}
-                className="p-4 rounded-xl bg-[#0F1116]/80 border-l-4"
-                style={{
-                  borderLeftColor:
-                    i === 0 ? "#55D437" : i === 1 ? "#D4AF37" : "#808080",
-                }}
-              >
+            {roadmapPhases.map((r, i) => {
+              const s = phaseStatus[r.status];
+              const done = r.status === "completed";
+              return (
                 <div
-                  className="font-semibold"
+                  key={i}
+                  className="p-4 rounded-xl bg-[#0F1116]/80 border-l-4"
                   style={{
-                    color:
-                      i === 0 ? "#55D437" : i === 1 ? "#D4AF37" : "#808080",
+                    borderLeftColor: s.color,
                   }}
                 >
-                  {r[0]}
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {done && (
+                      <CheckCircle2 size={16} style={{ color: s.color }} />
+                    )}
+                    <div className="font-semibold" style={{ color: s.color }}>
+                      {r.title}
+                    </div>
+                    <span
+                      className="text-[11px] px-2 py-[2px] rounded-full font-medium"
+                      style={{
+                        color: s.color,
+                        backgroundColor: `${s.color}1A`,
+                        border: `1px solid ${s.color}40`,
+                      }}
+                    >
+                      {s.label}
+                    </span>
+                  </div>
+                  <div className="mt-2 text-[#B0B0B0]">{r.desc}</div>
                 </div>
-                <div className="mt-2 text-[#B0B0B0]">{r[1]}</div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
       </AnimatedSection>
@@ -490,11 +517,15 @@ export default function AboutPage() {
                   financial decision-making across the country.
                 </div>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <div className="pointer-events-none opacity-60">
+                  <a
+                    href="https://www.linkedin.com/in/akash-bauri/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <GoldButton variant="outline" icon={Linkedin}>
                       LinkedIn
                     </GoldButton>
-                  </div>
+                  </a>
 
                   <div className="pointer-events-none opacity-60">
                     <GoldButton variant="outline" icon={Github}>
@@ -512,11 +543,11 @@ export default function AboutPage() {
                     </GoldButton>
                   </a>
 
-                  <div className="pointer-events-none opacity-60">
+                  <a href="mailto:akashbauri16021998@gmail.com">
                     <GoldButton variant="outline" icon={Mail}>
                       Contact Direct
                     </GoldButton>
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>

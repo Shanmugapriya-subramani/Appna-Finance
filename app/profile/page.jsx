@@ -183,10 +183,10 @@ export default function ProfilePage() {
                     <IconTile icon={Clock} boxed={false} size={14} />
                     <div><strong>Google Login</strong> — OAuth Protocol Setup Next</div>
                   </li>
-                  <li className="flex items-start gap-2">
+                  {/* <li className="flex items-start gap-2">
                     <IconTile icon={Clock} boxed={false} size={14} />
                     <div><strong>FastAPI Backend</strong> — Architecture Mapping Complete</div>
-                  </li>
+                  </li> */}
                   <li className="flex items-start gap-2">
                     <IconTile icon={Clock} boxed={false} size={14} />
                     <div><strong>AI Chat History</strong> — Persisted RAG Logging Next</div>
