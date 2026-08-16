@@ -219,23 +219,28 @@ const roadmapPhases = [
   },
 ];
 
+// `linkedin` is optional -- add the profile URL to a member and the card shows
+// a LinkedIn button. Leave it out (or empty) and no button is rendered.
 const teamMembers = [
   {
     name: "Akash Bauri",
     role: "Founder, CEO & Founding AI Engineer",
     img: "/akash_bauri.png",
+    linkedin: "https://www.linkedin.com/in/akash-bauri/",
     desc: `Responsible for the overall vision, AI architecture, product strategy, research, backend system design, RAG pipeline, AI agent development, machine learning integration, prompt engineering, and long-term technology roadmap of APPNA FINANCE.`,
   },
   {
     name: "Jyoti Bouri",
     role: "Co-Founder | Operations & Business Support",
     img: "/jyoti_bouri.jpg",
+    // linkedin: "https://www.linkedin.com/in/<profile-id>/",
     desc: "Supports business operations, customer relationship management, accounting coordination, financial documentation, administrative planning, partnership support, and organizational growth while helping build a reliable and customer-focused financial education platform.",
   },
   {
     name: "Shanmugapriya Subramani",
     role: "Lead Frontend Engineer",
     img: "/shanmugapriya_subramani.png",
+    linkedin: "https://www.linkedin.com/in/shanmugapriya-subramani/",
     desc: "Leads frontend architecture and user experience design by developing modern, responsive, and scalable interfaces. Responsible for implementing premium UI components, improving usability, maintaining design consistency, and delivering a seamless learning experience across the APPNA FINANCE platform.",
   },
 ];
@@ -583,6 +588,19 @@ export default function AboutPage() {
                   <div className="text-[13px] mt-1 text-[#D4AF37] text-center">
                     {m.role}
                   </div>
+
+                  {m.linkedin && (
+                    <a
+                      href={m.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${m.name} on LinkedIn`}
+                      className="mt-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[12px] text-[#D4AF37] border border-[#D4AF37]/35 hover:bg-[#D4AF37]/10 transition-colors"
+                    >
+                      <Linkedin size={14} />
+                      LinkedIn
+                    </a>
+                  )}
                 </div>
 
                 <p className="text-[13px] mt-4 leading-relaxed text-[#8A8F98] text-left">
