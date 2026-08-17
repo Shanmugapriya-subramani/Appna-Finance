@@ -246,14 +246,25 @@ const teamMembers = [
 ];
 
 const contactDetails = [
-  { icon: Mail, label: "Email", value: "Coming Soon" },
+  {
+    icon: Mail,
+    label: "Email",
+    value: "akashbauri16021998@gmail.com",
+    href: "mailto:akashbauri16021998@gmail.com",
+  },
   { icon: Globe2, label: "Website", value: "Coming Soon" },
   { icon: Github, label: "GitHub", value: "Coming Soon" },
-  { icon: Linkedin, label: "LinkedIn", value: "Coming Soon" },
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    value: "View Profile 🔗",
+    href: "https://www.linkedin.com/in/akash-bauri/",
+  },
   {
     icon: Youtube,
     label: "YouTube Channel",
-    value: "https://youtube.com/@akashlearninghub-m7n",
+    value: "Visit Channel 🔗",
+    href: "https://youtube.com/@akashlearninghub-m7n",
   },
 ];
 
@@ -660,31 +671,34 @@ export default function AboutPage() {
         <section>
           <SectionEyebrow icon={Mail}>Get in Touch</SectionEyebrow>
           <div className="grid sm:grid-cols-5 gap-4 mt-4">
-            {contactDetails.map((c, i) => (
-              <div
-                key={i}
-                className="rounded-xl p-4 text-center bg-[#171B22]/60 border border-white/5"
-              >
-                <div className="flex items-center justify-center gap-2">
-                  <IconTile icon={c.icon} boxed={false} size={16} />
-                  <div className="text-[13px] font-semibold text-[#D4AF37]">
-                    {c.label}
+            {contactDetails.map((c, i) => {
+              const isExternal = c.href && c.href.startsWith("http");
+              return (
+                <div
+                  key={i}
+                  className="rounded-xl p-4 text-center bg-[#171B22]/60 border border-white/5"
+                >
+                  <div className="flex items-center justify-center gap-2">
+                    <IconTile icon={c.icon} boxed={false} size={16} />
+                    <div className="text-[13px] font-semibold text-[#D4AF37]">
+                      {c.label}
+                    </div>
                   </div>
+                  {c.href ? (
+                    <a
+                      href={c.href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noreferrer" : undefined}
+                      className="block mt-2 text-[13px] text-[#F2F1EC] hover:underline break-words"
+                    >
+                      {c.value}
+                    </a>
+                  ) : (
+                    <div className="mt-2 text-[#808080]">{c.value}</div>
+                  )}
                 </div>
-                {c.value.startsWith && c.value.startsWith("http") ? (
-                  <a
-                    href={c.value}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="block mt-2 text-[#F2F1EC] hover:underline"
-                  >
-                    Visit Channel 🔗
-                  </a>
-                ) : (
-                  <div className="mt-2 text-[#808080]">{c.value}</div>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
       </AnimatedSection>
