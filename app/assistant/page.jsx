@@ -22,7 +22,7 @@ import SectionEyebrow from "@/components/SectionEyebrow";
 import Card from "@/components/Card";
 import GoldButton from "@/components/GoldButton";
 
-const API_URL = "https://ai-agent-production-5557.up.railway.app/";
+const API_URL = "https://ai-agent-production-5557.up.railway.app/api/v1/chat";
 
 const QUICK_QUESTIONS = [
   { icon: CreditCard, cat: "Credit", q: "How to improve CIBIL Score?" },
